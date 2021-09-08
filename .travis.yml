@@ -14,6 +14,7 @@ script:
   - xcodebuild -showsdks
   - xcodebuild -list
   - xcodebuild -workspace "$WORKSPACE" -list
+  - xcodebuild test -enableCodeCoverage YES
 
   # Build Example in Debug
   - xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c
