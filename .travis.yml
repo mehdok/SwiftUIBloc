@@ -18,30 +18,17 @@ jobs:
       install: brew install swiftformat
       script: swiftformat . --lint || travis_terminate 1;
       
-#jobs:
-#    include:
-#        - stage: "Code Style"
-#            name: "Check Code Style"
-#            before_install:
-#                - brew update
-#            install:
-#                - brew install swiftformat
-#            script:
-#                - swiftformat . --lint --verbose || travis_terminate 1;
-#before_install:
-#    - brew update
-#
-#install:
-#    - brew install swiftformat
-#
-#script:
-#    - set -o pipefail
-#    - xcodebuild -version
-#    - xcodebuild -showsdks
-#    - xcodebuild -list
-#    - swiftformat --version
-#    - swiftformat . --lint --verbose
-#    - swift test --enable-code-coverage
-#    - xcodebuild -workspace "$WORKSPACE" -list
-#    - xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c
-#
+    - stage: test
+      name: "Unit Tests"
+      script: swift test --enable-code-coverage || travis_terminate 1;
+      
+    - stage: build
+      name: "Debug Build"
+      script:
+        - set -o pipefail
+        - xcodebuild -version
+        - xcodebuild -showsdks
+        - xcodebuild -list
+        - swiftformat --version
+        - xcodebuild -workspace "$WORKSPACE" -list
+        - xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c
