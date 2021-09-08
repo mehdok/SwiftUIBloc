@@ -28,8 +28,7 @@ script:
     - xcodebuild -version
     - xcodebuild -showsdks
     - xcodebuild -list
-    - (cd $PROJECT_NAME && swift build)
-    - (cd $PROJECT_NAME && swift test)
+    - swift test --enable-code-coverage
     - xcodebuild -workspace "$WORKSPACE" -list
     - xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c
         
