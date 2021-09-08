@@ -8,12 +8,18 @@ env:
   matrix:
     - DESTINATION="OS=14.1,name=iPhone 12"
       SCHEME="$IOS_FRAMEWORK_SCHEME"
-script:
-  - set -o pipefail
-  - xcodebuild -version
-  - xcodebuild -showsdks
-  - xcodebuild -list
-  - xcodebuild -workspace "$WORKSPACE" -list
-
-  # Build Example in Debug
-  - xcodebuild -workspace "$WORKSPACE" test -enableCodeCoverage YES -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c
+jobs:
+    include:
+#        - stage: "Tests"
+#        name: "Unit Tests"
+#        script: ./unit-tests
+        - stage: build
+        name: "Build Debug example app"
+        script:
+            - set -o pipefail
+            - xcodebuild -version
+            - xcodebuild -showsdks
+            - xcodebuild -list
+            - xcodebuild -workspace "$WORKSPACE" -list
+            - xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c
+        
