@@ -44,13 +44,13 @@ struct AnimeListScreen: View {
                     AnimeDetailScreen(animeId: anime.malID,
                                       animeTitle: anime.title,
                                       bloc: AnimeDetailBloc(.initial))) {
-                    AnimeView(anime: anime)
-                        .onAppear {
-                            // Load more anime at the end of the list
-                            if anime == animeList.last {
-                                bloc.add(.loadMoreAnime)
+                        AnimeView(anime: anime)
+                            .onAppear {
+                                // Load more anime at the end of the list
+                                if anime == animeList.last {
+                                    bloc.add(.loadMoreAnime)
+                                }
                             }
-                        }
                 }
             }
 
