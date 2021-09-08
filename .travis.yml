@@ -29,6 +29,5 @@ jobs:
         - xcodebuild -version
         - xcodebuild -showsdks
         - xcodebuild -list
-        - swiftformat --version
         - xcodebuild -workspace "$WORKSPACE" -list
         - xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c
