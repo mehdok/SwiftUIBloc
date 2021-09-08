@@ -9,16 +9,22 @@ env:
   matrix:
     - DESTINATION="OS=14.1,name=iPhone 12"
       SCHEME="$IOS_FRAMEWORK_SCHEME"
+      
 jobs:
-    include:
-        - stage: "Code Style"
-            name: "Check Code Style"
-            before_install:
-                - brew update
-            install:
-                - brew install swiftformat
-            script:
-                - swiftformat . --lint --verbose || travis_terminate 1;
+  include:
+    - stage: test
+      script: skip
+      
+#jobs:
+#    include:
+#        - stage: "Code Style"
+#            name: "Check Code Style"
+#            before_install:
+#                - brew update
+#            install:
+#                - brew install swiftformat
+#            script:
+#                - swiftformat . --lint --verbose || travis_terminate 1;
 #before_install:
 #    - brew update
 #
