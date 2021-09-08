@@ -9,34 +9,30 @@ env:
   matrix:
     - DESTINATION="OS=14.1,name=iPhone 12"
       SCHEME="$IOS_FRAMEWORK_SCHEME"
-#jobs:
-#    include:
-#        - stage: "Tests"
-#        name: "Unit Tests"
-#        script: ./unit-tests
-#        - stage: build
-#        name: "Build Debug example app"
-#        script:
-#            - set -o pipefail
-#            - xcodebuild -version
-#            - xcodebuild -showsdks
-#            - xcodebuild -list
-#            - xcodebuild -workspace "$WORKSPACE" -list
-#            - xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c
-before_install:
-    - brew update
-    
-install:
-    - brew install swiftformat
-    
-script:
-    - set -o pipefail
-    - xcodebuild -version
-    - xcodebuild -showsdks
-    - xcodebuild -list
-    - swiftformat --version
-    - swiftformat . --lint --verbose
-    - swift test --enable-code-coverage
-    - xcodebuild -workspace "$WORKSPACE" -list
-    - xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c
-        
+jobs:
+    include:
+        - stage: "Code Style"
+        name: "Check Code Style"
+        before_install:
+            - brew update
+        install:
+            - brew install swiftformat
+        script:
+            - swiftformat . --lint --verbose || travis_terminate 1;
+#before_install:
+#    - brew update
+#
+#install:
+#    - brew install swiftformat
+#
+#script:
+#    - set -o pipefail
+#    - xcodebuild -version
+#    - xcodebuild -showsdks
+#    - xcodebuild -list
+#    - swiftformat --version
+#    - swiftformat . --lint --verbose
+#    - swift test --enable-code-coverage
+#    - xcodebuild -workspace "$WORKSPACE" -list
+#    - xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c
+#
