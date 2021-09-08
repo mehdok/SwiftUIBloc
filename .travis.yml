@@ -3,23 +3,33 @@ osx_image: xcode12.5
 env:
   global:
   - WORKSPACE="./iOS Example/iOS Example.xcworkspace"
+  - PROJECT_NAME="SwiftUIBloc"
   - IOS_FRAMEWORK_SCHEME="iOS Example"
   - EXAMPLE_SCHEME="iOS Example"
   matrix:
     - DESTINATION="OS=14.1,name=iPhone 12"
       SCHEME="$IOS_FRAMEWORK_SCHEME"
-jobs:
-    include:
+#jobs:
+#    include:
 #        - stage: "Tests"
 #        name: "Unit Tests"
 #        script: ./unit-tests
-        - stage: build
-        name: "Build Debug example app"
-        script:
-            - set -o pipefail
-            - xcodebuild -version
-            - xcodebuild -showsdks
-            - xcodebuild -list
-            - xcodebuild -workspace "$WORKSPACE" -list
-            - xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c
+#        - stage: build
+#        name: "Build Debug example app"
+#        script:
+#            - set -o pipefail
+#            - xcodebuild -version
+#            - xcodebuild -showsdks
+#            - xcodebuild -list
+#            - xcodebuild -workspace "$WORKSPACE" -list
+#            - xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c
+script:
+    - set -o pipefail
+    - xcodebuild -version
+    - xcodebuild -showsdks
+    - xcodebuild -list
+    - (cd $PROJECT_NAME && swift build)
+    - (cd $PROJECT_NAME && swift test)
+    - xcodebuild -workspace "$WORKSPACE" -list
+    - xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c
         
