@@ -12,8 +12,11 @@ env:
       
 jobs:
   include:
-    - stage: test
-      script: skip
+    - stage: preBuild
+      name: "Check Code Style"
+      before_install: brew update
+      install: brew install swiftformat
+      script: swiftformat . --lint --verbose || travis_terminate 1;
       
 #jobs:
 #    include:
