@@ -1,6 +1,6 @@
 # SwiftUIBloc
 
-![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20tvOS%20%7C%20macOS%20%7C%20watchOS-lightgrey) [![CI Status](http://img.shields.io/travis/mehdok/SwiftUIBloc.svg?style=flat)](https://travis-ci.org/mehdok/SwiftUIBloc)
+![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20tvOS%20%7C%20macOS%20%7C%20watchOS-lightgrey) ![](https://github.com/mehdok/SwiftUIBlocPrivate/workflows/build/badge.svg)
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/mehdok/SwiftUIBloc)
 [![License](https://img.shields.io/github/license/mehdok/SwiftUIBloc)](LICENSE) [![codecov](https://codecov.io/gh/mehdok/SwiftUIBloc/branch/master/graph/badge.svg)](https://codecov.io/gh/mehdok/SwiftUIBloc)
 
