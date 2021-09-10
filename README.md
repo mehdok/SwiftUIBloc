@@ -1,8 +1,8 @@
 # SwiftUIBloc
 
-[![CI Status](http://img.shields.io/travis/mehdok/SwiftUIBloc.svg?style=flat)](https://travis-ci.org/mehdok/SwiftUIBloc)
+![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20tvOS%20%7C%20macOS%20%7C%20watchOS-lightgrey) [![CI Status](http://img.shields.io/travis/mehdok/SwiftUIBloc.svg?style=flat)](https://travis-ci.org/mehdok/SwiftUIBloc)
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/mehdok/SwiftUIBloc)
-[![License](https://img.shields.io/github/license/mehdok/SwiftUIBloc)](LICENSE)
+[![License](https://img.shields.io/github/license/mehdok/SwiftUIBloc)](LICENSE) [![codecov](https://codecov.io/gh/mehdok/SwiftUIBloc/branch/master/graph/badge.svg)](https://codecov.io/gh/mehdok/SwiftUIBloc)
 
 The Bloc Pattern is a way to separate UI and Logic in SwiftUI codes.
 The Bloc is like a state machine where it accepts an event and produce a state.
@@ -17,11 +17,13 @@ macOS(.v10_15), iOS(.v13), tvOS(.v14), watchOS(.v6)
 
 ## Installation
 
-Add this to your project using Swift Package Manager. In Xcode that is simply: File > Swift Packages > Add Package Dependency... and you're done. Alternative installations options are shown below for legacy projects.
+#### Swift Package Manager
 
-### CocoaPods
+`https://github.com/mehdok/SwiftUIBloc`
 
-If you are already using [CocoaPods](http://cocoapods.org), just add 'SwiftUIBloc' to your `Podfile` then run `pod install`.
+#### CocoaPods
+
+`pod 'SwiftUIBloc'`
 
 ## Usage
 
