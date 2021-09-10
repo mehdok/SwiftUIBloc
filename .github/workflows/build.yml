@@ -1,0 +1,57 @@
+name: build
+
+on:
+  push:
+    branches: [ master ]
+    tags:
+      - '*'
+      
+  pull_request:
+    branches: [ master ]
+  
+env:
+  SCHEME: 'SwiftUIBloc'
+  EXAMPLE_SCHEME: "'iOS Example'"
+  WORKSPACE: "'./iOS Example/iOS Example.xcworkspace'"
+  DESTINATION: "'platform=iOS Simulator,name=iPhone 12,OS=14.4'"
+  
+jobs:
+  code_style:
+    runs-on: macos-latest
+    timeout-minutes: 5
+
+    steps:
+#      - name: Install swiftformat
+#        run: brew install swiftformat
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Check code style
+        run: swiftformat . --lint
+
+  tests:
+    needs: code_style
+    runs-on: macos-latest
+    timeout-minutes: 10
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run unit tests
+      run: xcodebuild test -scheme ${{ env.SCHEME }} -workspace ${{ env.WORKSPACE }} -destination ${{ env.DESTINATION }} | xcpretty && exit ${PIPESTATUS[0]}
+    - name: Upload coverage to Codecov
+      if: github.event_name == 'push'
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODE_COV_SECRET}}
+
+  build:
+    needs: tests
+    runs-on: macos-latest
+    timeout-minutes: 15
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Debug Build
+      run: xcodebuild -workspace ${{ env.WORKSPACE }} -scheme ${{ env.EXAMPLE_SCHEME }} -destination ${{ env.DESTINATION }} -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty -c
+ 
+
+
